@@ -24,16 +24,19 @@ public class MyLinkedList {
 		mylist.add(9);
 		mylist.add(10);
 		mylist.add(11);
-		MyLinkedList mylist2 = new MyLinkedList();
-		mylist2.add(1);
-		mylist2.add(2);
-		mylist2.add(3);
-		mylist2.add(4);
-		mylist2.add(5);
-		mylist2.add(7);
-		mylist2.add(8);
-		MyLinkedList mylist3 = meargeList(mylist,mylist2);
-		mylist3.foreach();
+		mylist.add(12);
+		mylist.delNodeLast(10);
+		mylist.foreach();
+//		MyLinkedList mylist2 = new MyLinkedList();
+//		mylist2.add(1);
+//		mylist2.add(2);
+//		mylist2.add(3);
+//		mylist2.add(4);
+//		mylist2.add(5);
+//		mylist2.add(7);
+//		mylist2.add(8);
+//		MyLinkedList mylist3 = meargeList(mylist,mylist2);
+//		mylist3.foreach();
 //		mylist.rever2();
 //		mylist.foreach();
 
@@ -192,6 +195,66 @@ public class MyLinkedList {
 			node.next= n1;
 		}
 		return meageList;
+	}
+	/**
+	 * 查找链表中间节点 查找中间节点
+	 * 暂不做空判断
+	 */
+	public  void midNode(){
+		Node n1 = root;//首先为止
+		Node n2 = root.next;//第二个位置
+		while(n1!=null &&n2!=null){
+			if(n2.next!=null&&n2.next.next!=null){
+				n2=n2.next.next;
+				n1=n1.next;
+			}else{
+				if(n2.next!=null && n2.next.next==null){
+					n1 = n1.next;
+					n2 = null;
+				}
+				break;
+			}
+		}
+		if(n2!=null){
+			//输出两个
+			System.out.println(n1.o+"----"+n1.next.o);
+		}else{
+			//输出一个中间位置
+			System.out.println(n1.o+"----");
+		}
+		
+	}
+	/**
+	 * 双指针链表实例操作	
+	 * //不使用size用链表特性去做删除
+		从后删除节点
+	 * @param index
+	 */
+	public void delNodeLast(int index){
+		//删除倒数N个节点
+		Node first = root;
+		Node tmp = root;
+		Node now = null;
+		while(first!=null){
+			if(index>0){
+				first = first.next;
+				index--;
+			}else{
+				first = first.next;
+				now = tmp;
+				if(tmp ==null){
+					tmp = root;
+				}else{
+					tmp = tmp.next;
+				}
+			}
+		}
+		if(now!=null){
+			now.next = tmp.next;
+		}
+		if(tmp == root){
+			root = root.next;
+		}
 	}
 	
 }
